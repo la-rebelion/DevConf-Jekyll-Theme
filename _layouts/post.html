@@ -1,0 +1,25 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+{% include head.html %}
+
+<body>
+  {% include navigation-header.html navigation-type="post" %}
+  {% include hero.html size="small"%}
+	<section id="about-section" class="about-section section theme-bg-light">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">{{ page.title }}</h3>
+			<div class="section-intro single-col-max mx-auto mb-4">{{ content | markdownify }}</div>
+		</div><!--//container-->
+	</section><!--//about-section-->
+  {% include footer.html %}
+{% include scripts.html %}
+
+</body>
+
+</html>
+

@@ -81,10 +81,13 @@ var spy = new Gumshoe('#navigation a', {
 	offset: 69 //page .header heights
 });
 
-
+/* ======= rebelion.la ========= */
+// added to dynamically include the date countdown depending on page value
+var eventDate = document.getElementById("event-date").firstChild.textContent;
 /* ======= Countdown ========= */
 // set the date we're counting down to
-var target_date = new Date("Oct 12, 2024").getTime();
+// var target_date = new Date("Oct 12, 2024").getTime();
+var target_date = new Date(eventDate).getTime();
  
 // variables for time units
 var days, hours, minutes, seconds;

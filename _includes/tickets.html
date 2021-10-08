@@ -1,0 +1,57 @@
+{% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
+{% if page.event %}
+	{% assign event = site.data.events[page.event] %}
+{% endif %}
+{% assign tickets = event.tickets %}
+<section id="tickets-section" class="tickets-section section theme-bg-light">
+    <div class="container">
+        <h3 class="section-heading text-center mb-3">Tickets</h3>
+        <div class="section-intro single-col-max mx-auto text-center mb-4">{{tickets.intro}}</div>
+        
+        <div class="row pricing mb-5">
+{% for pricing in tickets.pricing %}
+            <div class="col-12 col-md-4 p-2 p-lg-4">
+                <div class="card rounded-0 border-0">
+                    <div class="card-body p-0">
+                        <div class="heading  text-center p-3">
+                            <h4 class="text-white mb-0">{{ pricing.name }}</h4>
+                        </div>
+                        <div class="info p-3">
+                            <div class="price-figure text-center mb-3"><span class="currency">$</span><span class="number">{{ pricing.price }}</span></div>
+                            <div class="desc px-3">
+                                {{ pricing.description }}
+                            </div>
+                        </div><!--//info-->
+                    </div><!--//card-body-->
+                    <div class="card-footer text-center">
+{%- comment -%} true by default {%- endcomment -%}
+{% assign buttonStatus = "" %}
+{% assign pricingLink = pricing.cta.link %}
+{% assign pricingText = pricing.cta.text %}
+{% if pricing.cta.enabled == false %}
+    {% assign pricingLink = "#" %}
+    {% assign pricingText = "SOLD OUT" %}
+    {% assign buttonStatus = "disabled" %}
+{% endif %}
+                        <a href="{{ pricingLink }}" class="btn btn-primary {{ buttonStatus }}">{{ pricingText }}</a>
+                    </div>
+                </div><!--//card-->
+            </div><!--//col-->
+{% endfor %}
+        </div><!--//pricing-->
+
+{% if event.offers %}    
+        <div class="offers text-center bg-white p-4 p-lg-5">
+            <h4 class="mb-3">What's included?</h4>
+            <ul class="offers-list list-unstyled d-inline-block mx-auto text-start">
+                {% for offer in event.offers %}
+                {%- comment -%} markdonify will add a paragraph, then applying a filter to remove this tag and avoid breaking line with icon {%- endcomment -%}
+                {%- comment -%} Reference: https://stackoverflow.com/a/30828197/5078874 {%- endcomment -%}
+                <li><span class="icon-holder me-2"><i class="fas fa-{{ offer.icon }}"></i></span>{{ offer.description | markdownify | remove: "<p>" | remove: '</p>' }}</li>
+                {% endfor %}
+            </ul><!--offers-list-->
+        </div><!--//offers-->
+{% endif %}
+
+    </div><!--//container-->
+</section><!--//tickets-section-->

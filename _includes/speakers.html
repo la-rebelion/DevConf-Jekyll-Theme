@@ -1,0 +1,85 @@
+{% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
+{% if page.event %}
+	{% assign event = site.data.events[page.event] %}
+{% endif %}
+{% assign speakers = event.speakers %}
+{% if speakers %}
+    {% assign count = 1 %}
+	<section id="speakers-section" class="speakers-section section">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">Speakers</h3>
+			<div class="section-intro text-center single-col-max mx-auto mb-5">{{ speakers.intro }}</div>
+			<div class="row">
+    {% for item in speakers.speaker %}
+				<div class="col-6 col-lg-3 mb-4">
+					<div class="card rounded-0">
+						<a href="#modal-speaker-{{ count }}" data-bs-toggle="modal" data-bs-target="#modal-speaker-{{ count }}"><img src="{{ item.picture }}" class="card-img-top rounded-0" alt="{{ item.name }}"></a>
+						<div class="card-body">
+							<h5 class="card-title mb-2">{{ item.name }}</h5>
+							<div class="card-text mb-3">
+								<div class="meta">{{ item.role }}</div>
+								<div class="meta">{{ item.organization }}</div>
+							</div><!--//card-text-->
+							<a href="#modal-speaker-{{ count }}" data-bs-toggle="modal" data-bs-target="#modal-speaker-{{ count }}">Read more &rarr;</a>
+						</div><!--//card-->
+						<div class="card-footer text-muted">
+							<ul class="social-list list-inline mb-0">
+								<li class="list-inline-item"><a  href="{{ "https://twitter.com/" | append: item.twitter }}"><i class="fab fa-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="{{ "https://linkedin.com/in/" | append: item.linkedin }}"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="{{ "https://github.com/" | append: item.github }}"><i class="fab fa-github fa-fw"></i></a></li>
+							</ul><!--//social-list-->
+						</div>
+					</div><!--//card-->
+				</div><!--//col-->
+        {% assign count = count | plus: 1 %}
+    {% endfor %}
+			<div class="speakers-cta text-center py-3"><a class="btn btn-primary btn-lg" href="{{ speakers.cta.link }}" target="_blank">{{ speakers.cta.text }}</a></div>
+		</div><!--//container-->
+		
+	</section><!--//speakers-section-->
+	
+	<div class="container">
+		<hr>
+	</div>
+	
+    {% assign count = 1 %}
+    {% for item in speakers.speaker %}
+	<!-- Modal Speaker -->
+	<div class="modal modal-speaker modal-speaker-{{ count }}" id="modal-speaker-{{ count }}" tabindex="-1" role="dialog" aria-labelledby="speaker-{{ count }}-ModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 id="speaker-{{ count }}-ModalLabel" class="modal-title sr-only">{{ item.name }}</h4>
+				</div>
+				<div class="modal-body p-0">
+					<div class="theme-bg-light p-5">
+						<div class="row">
+							<div class="col-12 col-md-auto text-center">
+							    <img class="profile-image mb-3 mb-md-0 me-md-4 rounded-circle mx-auto" src="{{ item.picture }}" alt="{{ item.name }}" />
+							</div>
+							
+							<div class="col text-center text-md-start mx-auto">
+								<h2 class="name mb-2">{{ item.name }}</h2>
+								<div class="meta">{{ item.role }}</div>
+								<div class="meta mb-2">{{ item.organization }}</div>
+								<ul class="social-list list-inline mb-0">
+                                
+                                    <li class="list-inline-item"><a  href="{{ "https://twitter.com/" | append: item.twitter }}"><i class="fab fa-twitter fa-fw"></i></a></li>
+                                    <li class="list-inline-item"><a  href="{{ "https://linkedin.com/in/" | append: item.linkedin }}"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                                    <li class="list-inline-item"><a  href="{{ "https://github.com/" | append: item.github }}"><i class="fab fa-github fa-fw"></i></a></li>
+								</ul><!--//social-list--> 
+							</div><!--//col-->
+						</div><!--//row-->
+					</div>
+					<div class="desc p-4 p-lg-5">
+						{{ item.summary }}
+					</div>
+				</div><!--//modal-body-->
+			</div><!--//modal-content-->
+		</div><!--//modal-dialog-->
+	</div><!--//modal-->
+        {% assign count = count | plus: 1 %}
+    {% endfor %}
+	
+{% endif %}

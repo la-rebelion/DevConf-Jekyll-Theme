@@ -1,0 +1,74 @@
+{% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
+{%- comment -%}{% assign event = site.data.events['home-featured'] %} <!-- 'home' -->{%- endcomment -%}
+{% if page.event %}
+	{% assign event = site.data.events[page.event] %}
+{% endif %}
+{% assign schedule = event.schedule %}
+{% if schedule %}
+	<section id="schedule-section" class="schedule-section section">
+		<div class="container">
+			<h3 class="section-heading text-center mb-5">Schedule</h3>
+			<!-- Nav tabs -->
+			<ul class="schedule-nav nav nav-pills nav-fill" id="myTab" role="tablist">
+{% assign count = 1 %}
+{% for dateEvent in schedule.dates %}
+				<li class="nav-item me-2">
+					<a class="nav-link {% if count == 1 %}active{% endif %}" id="tab-{{ count }}" data-bs-toggle="tab" href="#tab-{{ count }}-content" role="tab" aria-controls="tab-{{ count }}-content" aria-selected="true">
+						<span class="heading">{{ dateEvent.heading }}</span>
+						<span class="meta">({{ dateEvent.date | date: "%a %d, %b" }})</span>
+					</a>
+				</li>
+{% assign count = count | plus: 1 %}
+{% endfor %}
+            </ul>
+
+			<!-- Tab panes -->
+			<div class="schedule-tab-content tab-content">
+{% assign count = 1 %}
+{% for dateEvent in schedule.dates %}
+{% assign plan = dateEvent.plan %}
+{% assign countSpeaker = 1 %}
+    {% if plan %}
+				<div class="tab-pane active" id="tab-{{ count }}-content" role="tabpanel" aria-labelledby="tab-{{ count }}">
+        {% for planItem in plan %}
+            {%- comment -%} It is required to filter with first, becauce 'where' returns an array {%- endcomment -%}
+            {% assign speaker = event.speakers.speaker | where: "slug", planItem.speaker | first %}
+					<div class="item item-talk">
+						<div class="meta">
+							<h4 class="time mb-3">{{ planItem.start-time | date: "%H:%M" }} - {{ planItem.end-time | date: "%H:%M" }}</h4>
+            {% if speaker %}
+							<div class="profile">
+								<a href="#modal-speaker-{{ countSpeaker }}" data-bs-toggle="modal" data-bs-target="#modal-speaker-{{ countSpeaker }}"><img class="profile-image rounded-circle  mb-2" src="assets/images/speakers/speaker-{{ countSpeaker }}.jpg" alt=""></a>
+								<div class="name"><a class="theme-link" href="#modal-speaker-{{ countSpeaker }}" data-bs-toggle="modal" data-bs-target="#modal-speaker-{{ countSpeaker }}">{{ speaker.name }}</a></div>
+							</div><!--//profile-->
+            {% endif %}
+						</div><!--//meta-->
+						<div class="content">
+							<h3 class="title mb-3">{{ planItem.conference }}</h3>
+							<div class="location mb-3"><i class="fas fa-map-marker-alt me-2"></i>{{ planItem.location }}</div>
+							<div class="desc">{{ planItem.summary | markdownify }}</div>
+						</div><!--//content-->
+					</div><!--//item-->
+            {%- comment -%} Only increment counter if there is a speaker for this item {%- endcomment -%}
+            {% if speaker %}
+                {% assign countSpeaker = countSpeaker | plus: 1 %}
+            {% endif %}
+        {% endfor %}
+				</div><!--//tab-WITH_PLAN-content-->
+    {% else %}
+                <div class="tab-pane no-timeline" id="tab-{{ count }}-content" role="tabpanel" aria-labelledby="tab-{{ count }}">
+                    <h4 class="text-center py-5 text-muted">{{ dateEvent.heading }} Agenda Coming Soon...</h4>
+                </div><!--//tab-EMPTY-content-->        
+    {% endif %}
+    {% assign count = count | plus: 1 %}
+{% endfor %}
+			</div><!--//schedule-tab-content-->
+			<div class="schedule-cta text-center mx-auto">
+{% for ctaSchedule in schedule.cta-group %}
+                <a href="{{ ctaSchedule.link }}" class="btn {{ ctaSchedule.button-class }} btn-lg me-md-2 d-block d-md-inline-block mb-3 mb-md-0" target="_blank"> {{ ctaSchedule.text }} </a>
+{% endfor %}
+            </div>
+            <!-- <a href="{{  }}" class="btn btn-secondary btn-lg d-block d-md-inline-block" target="_blank">Buy Tickets</a> -->
+		</div><!--//container-->
+	</section><!--//schedule-section-->
+{% endif %}

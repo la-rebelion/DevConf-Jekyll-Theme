@@ -1,0 +1,20 @@
+<!-- This is used only for the index.html, a featured/comming event -->
+{% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
+{% if page.event %}
+	{% assign event = site.data.events[page.event] %}
+{% endif %}
+
+{% if event.sponsors %}
+	<section id="sponsors-section" class="sponsors-section section">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">Sponsors &amp; Partners</h3>
+			<div class="section-intro text-center single-col-max mx-auto mb-5">{{ event.sponsors.description }}</div>
+			<div class="row logos justify-content-center">
+{% for sponsorDetails in event.sponsors.sponsor %}
+				<div class="logo-item col-6 col-md-4 col-lg-2"><a href="{{ sponsorDetails.link }}"><img src="{{ sponsorDetails.icon }}" alt="{{ sponsorDetails.name }}"></a></div>
+{% endfor %}
+			</div><!--//row-->
+			<div class="sponsors-cta text-center pt-5"><a class="btn-primary btn btn-lg" href="{{ event.sponsors.cta.link }}">{{ event.sponsors.cta.text }}</a></div>
+		</div><!--//container-->
+	</section><!--//sponsors-section-->	
+{% endif %}

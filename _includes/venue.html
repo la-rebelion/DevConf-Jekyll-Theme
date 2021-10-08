@@ -1,0 +1,46 @@
+{% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
+{% if page.event %}
+	{% assign event = site.data.events[page.event] %}
+{% endif %}
+{% assign venue = event.venue %}
+
+{% if venue %}
+	<section id="venue-section" class="venue-section section  theme-bg-primary text-white">
+		<div class="container">
+			<h3 class="section-heading text-center mb-5 text-white">Venue</h3>
+			<div class="row gx-5 py-lg-5">
+				<div class="col-12 col-lg-7 h-100">
+					<div class="desc">
+						<h4 class="text-white mb-3">How To Get Here</h4>
+						<p>{{ venue.how-to-get-there.description | markdownify }}</p>						
+						<div class="row pt-3">
+{% for howToBuy in venue.how-to-get-there.how-to-by %}
+							<div class="col-12 col-md-6 mb-4">
+								<div class="grid-item p-4">
+									<h5 class="text-white mb-3 title"><i class="fas fa-{{ howToBuy.icon }} me-2"></i>{{ howToBuy.title }}</h5>
+									<p>{{ howToBuy.description }}</p>
+									<a class="text-white" href="{{ howToBuy.cta.link }}">{{ howToBuy.cta.text }} &rarr;</a>
+								</div><!--//grid-item-->
+							</div><!--col-->
+{% endfor %}
+						</div><!--//row-->
+						<h4 class="text-white mb-4 mt-3 mt-lg-5">Facilities &amp; Accommodations</h4>
+						<p>{{ venue.facilities.description | markdownify }}</p>
+						<a class="btn btn-ghost" href="{{ venue.facilities.cta.link }}">{{ venue.facilities.cta.text }}</a>
+					</div><!--//desc-->
+				</div><!--//col-->
+				<div class="col-12 col-xl-3 col-lg-4 offset-lg-1 position-relative h-100 mt-5 mt-lg-0">
+					<div class="figures-holder">
+                        {%- comment -%} Only four are considered, if nore than 4, then others are ommited {%- endcomment -%}
+                        {%- comment -%} FIXME - if no pictures are defined in data file, then, use the default one {%- endcomment -%}
+{% assign count = 0 %}
+{% for venuePic in venue.pictures limit:4 %}
+						<div class="figure figure-{{ count }}"><img class="shadow" src="{{ venuePic.picture }}" alt="{{ venuePic.text }}"></div>
+	{% assign count = count | plus: 1 %}
+{% endfor %}
+					</div><!--//figures-holder-->
+				</div><!--//col-->
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//venue-section-->
+{% endif %}

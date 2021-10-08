@@ -1,0 +1,48 @@
+{% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
+{% if page.url == "/" or page.url == "/index.html" %}
+{%- comment -%} FIXME: ADD LOGIC HANDLE MAIN MENU OR EVENT MENU {%- endcomment -%}
+{% endif %}
+{% if page.event %}
+	{% assign event = site.data.events[page.event] %}
+{% endif %}
+	<header id="header" class="header fixed-top">
+		<div class="branding">
+			<div class="container-fluid">
+				<nav class="main-nav navbar navbar-expand-lg">
+					<div class="site-logo"><a href="{{ "/index.html" | prepend: absolute_url }}"><img class="logo-icon" src="/assets/images/logo-white.svg" alt="logo"></a></div>
+					
+					<div class="navbar-btn order-lg-2"><a class="btn btn-secondary" href="{{ event.cta.link }}" target="_blank">Tickets</a></div>
+					
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					
+					<div id="navigation" class="navbar-collapse collapse justify-content-lg-end me-lg-3">
+						<ul class="nav navbar-nav">
+{%- comment -%}
+	TODO: Apply the navigation menu based on YAML config
+	Ref: https://jekyllrb.com/tutorials/navigation/#scenario-9-nested-tree-navigation-with-recursion
+{%- endcomment -%}
+							<li class="nav-item"><a class="nav-link" href="{{ site.url }}">Home</a></li>
+{% case include.navigation-type %}
+	{% when "event" %}
+							<li class="nav-item"><a class="nav-link scrollto" href="#speakers-section">Speakers</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#schedule-section">Schedule</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#tickets-section">Tickets</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#venue-section">Venue</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#sponsors-section">Sponsors</a></li>
+	{% when "home", "post" %}
+							<li class="nav-item"><a class="nav-link scrollto" href="#speakers-section">Events</a></li>
+							<li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+	{% else %} {%- comment -%} for default we assume home {%- endcomment -%}
+							<li class="nav-item"><a class="nav-link scrollto" href="#speakers-section">Events</a></li>
+							<li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+{% endcase %}
+						</ul><!--//nav-->
+					</div><!--//navabr-collapse-->
+
+				</nav><!--//main-nav-->
+				
+			</div><!--//container-->
+		</div><!--//branding-->
+	</header><!--//header-->

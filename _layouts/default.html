@@ -1,0 +1,23 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+{% include head.html %}
+
+<body>
+  {% include navigation-header.html navigation-type="home" %}
+  {% include hero.html %}
+  {%- comment -%} you can define more than one stats group and include where you need {%- endcomment -%}
+  {% include stats.html group="attendees" %}
+  {% include about.html %}
+  {% include events.html %}
+  {% include footer.html %}
+{% include scripts.html %}
+
+</body>
+
+</html>
+

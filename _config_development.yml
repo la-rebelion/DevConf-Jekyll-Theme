@@ -1,0 +1,10 @@
+### Site Settings ###
+title   : Contak ID DEV
+baseurl : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
+url     : http://localhost:4000
+
+### Analytics ###
+analytics:
+  enabled: false                                        # Set true to enable analytics
+  google:
+    tracking_id: ""

@@ -1,0 +1,21 @@
+{% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
+{% if page.event %}
+	{% assign event = site.data.events[page.event] %}
+{% endif %}
+{% assign stats = event.stats | where: "group", include.group | first %}
+{% if stats.stats-details %}
+	<div class="stats-block theme-bg-primary text-white py-4 text-center">
+		<div class="container">
+			<div class="row">
+{% for item in stats.stats-details %}
+				<div class="col-6 col-md-3">
+					<div class="item">
+						<div class="number">{{ item.number }}</div>
+						<div class="unit">{{ item.unit }}</div>
+					</div><!--//item-->
+				</div><!--//col-->    
+{% endfor %}
+			</div>
+		</div><!--//container-->
+	</div><!--//stats-block-->
+{% endif %}

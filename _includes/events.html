@@ -1,0 +1,35 @@
+{% assign events = site.data.events %}
+{% if events %}
+    {% assign count = 1 %}
+	<section id="speakers-section" class="speakers-section section">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">Events</h3>
+			<div class="section-intro text-center single-col-max mx-auto mb-5">These are the events we have for you</div>
+			<div class="row">
+    {% for item in events %}
+	{% assign event = item[1] %}
+				<div class="col-6 col-lg-3 mb-4">
+					<div class="card rounded-0">
+						<a href="{{ event.slug | absolute_url }}"><img src="{{ event.picture }}" class="card-img-top rounded-0" alt="{{ event.name }}"></a>
+						<div class="card-body">
+							<h5 class="card-title mb-2">{{ event.name }}</h5>
+							<div class="card-text mb-3">
+								<div class="meta">{{ event.date }}</div>
+								<div class="meta">{{ event.location }}</div>
+							</div><!--//card-text-->
+							<a href="{{ event.slug | absolute_url }}">Read more &rarr;</a>
+						</div><!--//card-->
+					</div><!--//card-->
+				</div><!--//col-->
+        {% assign count = count | plus: 1 %}
+    {% endfor %}
+			<div class="speakers-cta text-center py-3"><a class="btn btn-primary btn-lg" href="/events" target="_blank">More Events</a></div>
+		</div><!--//container-->
+		
+	</section><!--//speakers-section-->
+	
+	<div class="container">
+		<hr>
+	</div>
+	
+{% endif %}

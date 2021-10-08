@@ -1,7 +1,4 @@
 {% assign event = site.data.events | where: "featured", true | first %} <!-- 'home' -->
-{% if page.url == "/" or page.url == "/index.html" %}
-{%- comment -%} FIXME: ADD LOGIC HANDLE MAIN MENU OR EVENT MENU {%- endcomment -%}
-{% endif %}
 {% if page.event %}
 	{% assign event = site.data.events[page.event] %}
 {% endif %}
@@ -9,7 +6,7 @@
 		<div class="branding">
 			<div class="container-fluid">
 				<nav class="main-nav navbar navbar-expand-lg">
-					<div class="site-logo"><a href="{{ "/index.html" | prepend: absolute_url }}"><img class="logo-icon" src="{{ "/assets/images/logo-white.svg" | prepend: absolute_url }}" alt="logo"></a></div>
+					<div class="site-logo"><a href="{{ site.url }}{{ site.baseurl }}"><img class="logo-icon" src="{{ site.url }}{{ site.baseurl }}/assets/images/logo-white.svg" alt="logo"></a></div>
 					
 					<div class="navbar-btn order-lg-2"><a class="btn btn-secondary" href="{{ event.cta.link }}" target="_blank">Tickets</a></div>
 					
@@ -33,7 +30,7 @@
 							<li class="nav-item"><a class="nav-link scrollto" href="#sponsors-section">Sponsors</a></li>
 	{% else %} {%- comment -%} for default we assume home {%- endcomment -%}
 							<li class="nav-item"><a class="nav-link scrollto" href="#speakers-section">Events</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{ "/blog" | prepend: absolute_url }}">Blog</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{ site.url }}{{ site.baseurl }}/blog">Blog</a></li>
 {% endcase %}
 						</ul><!--//nav-->
 					</div><!--//navabr-collapse-->

@@ -1,8 +1,8 @@
 # DevConf-Theme
 
-DevConf is a free Bootstrap 5 for Jekyll. The idea of the template is to emulate  
-an Eventbrite like website, where you can publish and marketing you different events,  
-it can be easily customized to publish your events, training and workshops, you just need  
+DevConf is a free Bootstrap 5 for Jekyll. The idea of the template is to emulate 
+an Eventbrite like website, where you can publish and marketing you different events, 
+it can be easily customized to publish your events, training and workshops, you just need 
 to add a YAML file with the metadata for your event, and the template will do the magic.
 
 ## Demo
@@ -33,9 +33,10 @@ locations or previous events.
 
 ## Installation
 
-1. Clone the repository.  
-`git clone git@github.com:la-rebelion/DevConf-Jekyll-Theme.git`
-2. Create a markdown file with the event `slug` in the `front matter`.
+1. [Fork](https://github.com/la-rebelion/DevConf-Jekyll-Theme/fork) your own copy of the repository to your account.
+   1. Clone your repository to add/edit your own files.  
+`git clone git@github.com:<YOUR-GIT-USER-NAME>/DevConf-Jekyll-Theme.git`
+2. Per each event, in the "root" directory create a markdown file with the event `slug` in the `front matter`.
 ```yaml
 ---
 layout: event
@@ -49,25 +50,45 @@ name: We Are Developers 2024
 slug: we-are-developers-2024
 ... # this is just the head example, continue
 ```
+4. Create as many events as you want.
+5. Make sure GitHub Pages are turned on in the repository settings, and pointing to the `main` or `master` branch (where you cloned this repo)
+6. Commit and push changes.
+7. Your new site should be ready at https://username.github.io/DevConf-Jekyll-Theme
+
+To run it locally:
+
+1. Install [Jekyll](https://jekyllrb.com/docs/).  
+`gem install jekyll bundler`
+2. Build the site and make it available on a local server  
+`bundle exec jekyll serve  --config _config.yml,_config_development.yml`
+
+In example above you can switch part of your config settings depending on the environment, settings in later files override settings in earlier files.
+
+## Show your appreciation
+
+Would you donate for the cause? :blush: :fist:
+
+| PayPal | Buy me a coffee |
+| :----: | :-------------: |
+| <a href="https://www.paypal.com/donate?hosted_button_id=7CV28AHGL9ZZY" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Donate with PayPal button" style="height: auto !important;width: auto !important;"></a> | <a href="https://buymeacoffee.com/larebelion" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;"></a> |
 
 ## Credits
 
-* images are shown for demonstration [Unsplash](https://unsplash.com), photos for everyone.
+* [3rd Wave Media](https://gumroad.com/a/547198067) Bootstrap Themes & Templates.
+* [Unsplash](https://unsplash.com), photos for everyone.
+  * [The Climate Reality Project](https://unsplash.com/@climatereality?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+  * [Jaime Lopes](https://unsplash.com/@jaimelopes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
 
 ---
 
 ## Original Theme  
-This is based on the nice [DevConf-Theme](https://github.com/xriley/DevConf-Theme)
-
-### Theme Details
-
-**Original Demo:** https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-5-conference-template-for-tech-conferences-and-events/
+This Jekyll theme is based on the Bootstrap 5 DevConf-Theme by [3rd Wave Media](https://gumroad.com/a/547198067).
 
 ### Author & License
 
 The original Bootstrap template is made by UX/UI designer [Xiaoying Riley](https://twitter.com/3rdwave_themes) for developers and is 100% FREE as long as you **keep the footer attribution link**. You do not have the rights to resell, sublicense or redistribute (even for free) the template on its own or as a separate attachment from any of your work.
 
-If you'd like to **use the template without the footer attribution link**, you can [buy the **commercial license** via the theme website](https://themes.3rdwavemedia.com/bootstrap-templates/free/devconf-free-bootstrap-5-conference-template-for-tech-conferences-and-events/)
+If you'd like to **use the template without the footer attribution link**, you can [buy the **commercial license** via the theme website](https://gumroad.com/a/547198067/oTvro)
 
 ### Credits
 - [Bootstrap](https://getbootstrap.com/)

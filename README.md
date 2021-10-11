@@ -9,7 +9,11 @@ to add a YAML file with the metadata for your event, and the template will do th
 
 Check the [demo](https://la-rebelion.github.io/DevConf-Jekyll-Theme) in action.
 
-## Features:
+The main page looks like this:
+
+![DevConf Jekyll Theme Home](https://github.com/la-rebelion/DevConf-Jekyll-Theme/blob/master/assets/images/template_screenshots/DevConf-Jekyll-Theme.png?raw=true)
+
+## Features in Jekyll Theme:
 
 * Featured or sponsored event in the main page.
 * Sections that can be customized:
@@ -31,6 +35,15 @@ number of days of the event, etc. Add the data you need, fully customizable.
 locations or previous events.
 * Includes a blog link to allow you create you inbound marketing strategy with content.
 
+### Features from Original, Bootstrap Version:
+
+* Fully Responsive
+* HTML5 + CSS3
+* Built on Bootstrap 5
+* 1500+ FontAwesome icons
+* SCSS source files included
+* Compatible with all modern browsers
+
 ## Installation
 
 1. [Fork](https://github.com/la-rebelion/DevConf-Jekyll-Theme/fork) your own copy of the repository to your account.
@@ -43,9 +56,9 @@ layout: event
 event: we-are-developers-2024
 ---
 ```
-3. Create the manifest file in the `_data/events` directory, same name as `slug`. You can include the following inline metadata to specify the schema that can help you to validate the manifest correctness.
+3. Create the manifest file in the `_data/events` directory, same name as `slug`. You can include the following inline metadata (first line) to specify the schema that can help you to validate the manifest correctness.
 ```yaml
-# yaml-language-server: $schema=https://my.url.to/the/schema
+# yaml-language-server: $schema=https://schemas.rebelion.la/dev-conf-v1.0.json
 name: We Are Developers 2024
 slug: we-are-developers-2024
 ... # this is just the head example, continue
